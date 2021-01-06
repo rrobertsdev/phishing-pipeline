@@ -1,0 +1,76 @@
+\section{Methodology}
+\label{sec:methodology}
+
+In this section we outline the data we collected through scanning and
+crawling, and the limitations of our methodology. 
+
+
+\subsection{Domain Corpus Generation}
+\label{methodology:corpus}
+
+Our first step is to establish a corpus of suspicious domains to crawl in
+depth.
+%
+Every hour, our pipeline collects all new certificates added to certificate
+transparency logs using the Axeman~\todo{cite} tool.
+%
+For each new certificate, we extract the common name and any domains in the
+certificate's subject alternate domain (SAN) list.
+%
+If any of these new domains are deemed suspicious, they are added to an
+append-only corpus of suspicious domains to be monitored further.
+%
+A domain is considered suspicious if it is target embedding a website with an
+Alexa ranking in the top 100k most popular domains.
+%
+If a domain on a newly-issued certificate is already in our corpus, we make 
+note that a known domain was issued on a fresh certificate.
+
+
+\subsection{Page Crawling}
+\label{methodology:crawl}
+
+We crawl every domain in our domain corpus once each hour.
+%
+First we request all DNS A records for each domain D in the corpus when the
+crawl begins.
+%
+We then request the host names for all IP addresses returned in D's A
+records.
+%
+If the DNS lookup on D was successful, we attempt to establish a TLS connection
+to the domain.
+%
+If our crawl does not terminate with an HTTP 200 response, we consider
+D inaccessible at the time of the scan and do not probe further.
+%
+Otherwise we consider the crawl a success, and store the HTTP headers and
+HTML page content returned from our request to D.
+%
+We also store any URLs in the chain of redirections from D to the URL that
+ultimately returned the HTTP 200 response.
+
+
+If domain D was determined to be live, we attempt to connect to D a second
+time, now through the Selenium \todo{cite} browser.
+%
+If a connection is successfully established through Selenium, we again store
+the page's HTML content, as well as a screenshot of the page's content as it
+would render in a user's web browser.
+%
+Scanning and rendering domains through Selenium is more resources intensive
+than our preliminary scans, so we only process domains through selenium
+if they were determined to be live earlier in the hour.
+
+
+\subsection{Establishing True Positives}
+\label{methodology:positives}
+
+
+
+
+\subsection{Limitations}
+\label{methodology:limitations}
+
+
+

@@ -1,0 +1,119 @@
+
+\documentclass[letterpaper,twocolumn,10pt]{article}
+\usepackage{usenix-2020-09}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Packages {{{
+
+\usepackage{tikz}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{ulem}
+\usepackage{caption}
+\usepackage{color}
+\usepackage{epsfig}
+\usepackage{graphicx}
+\usepackage[labelformat=simple]{subcaption}
+\usepackage{hyperref}
+\usepackage{xspace}
+\usepackage{multirow}
+\usepackage{cleveref}
+\usepackage{balance}
+
+
+% }}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Custom Commands and Configs {{{
+
+% Formatting niceties 
+\newcommand{\etal}{et~al.\xspace}
+\newcommand{\parhead}[1]{\medskip \noindent \textbf{#1}~~}
+
+% Colored internal comments
+\ifdefined\isFinalized
+\newcommand{\todo}[1]{}
+\newcommand{\dml}[1]{}
+\newcommand{\ricro}[1]{}
+\usepackage{ulem}
+\normalem
+
+\else
+\usepackage{ulem}
+\normalem
+\newcommand{\todo}[1]{{\color{red}{Todo: #1}}}
+\newcommand{\dml}[1]{{\color{Blue}{#1}}}
+\newcommand{\ricro}[1]{{\color{Purple}{#1}}}
+
+\fi
+
+
+% Cleveref configuration
+\crefname{figure}{Figure}{Figures}
+\crefname{equation}{Equation}{Equations}
+\crefname{table}{Table}{Tables}
+\crefname{section}{Section}{Sections}
+\crefname{subfigure}{Figure}{Figure}
+
+
+
+% }}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Title and authors {{{
+
+
+% make title bold and 14 pt font (Latex default is non-bold, 16 pt)
+\title{\Large \bf Formatting Submissions for a USENIX Conference:\\
+  An (Incomplete) Example}
+
+
+% Submission Author
+\author {
+Paper \# \todo{XXX}
+}
+
+
+% Final Author
+%\author {
+%{\rm Richard Roberts}\\
+%University of Maryland
+%\and
+%{\rm Second Name}\\
+%Second Institution
+%}
+
+
+
+% }}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Document {{{
+
+
+%-------------------------------------------------------------------------------
+\begin{document}
+%-------------------------------------------------------------------------------
+
+%don't want date printed
+\date{}
+
+\maketitle
+
+\input{abstract}
+\input{intro}
+\input{background}
+\input{methodology}
+\input{results}
+\input{discussion}
+\input{conclusion}
+
+
+%-------------------------------------------------------------------------------
+\balance
+\bibliographystyle{plain}
+\bibliography{refs}
+
+
+\end{document}
+
+% }}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
